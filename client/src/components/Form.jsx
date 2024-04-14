@@ -3,7 +3,7 @@ import {Input} from "@/components/ui/input.jsx"
 import {Button} from "@/components/ui/button.jsx";
 import {Label} from "@radix-ui/react-label";
 
-function LoginForm(props) {
+function Form() {
 
     const [showLogin, setShowLogin] = useState(false);
 
@@ -59,4 +59,4 @@ function LoginForm(props) {
     )
 }
 
-export default LoginForm;
+export default Form;

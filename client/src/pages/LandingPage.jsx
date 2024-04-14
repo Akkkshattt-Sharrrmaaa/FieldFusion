@@ -2,15 +2,10 @@ import React from 'react';
 import Players from '../assets/players.png'
 import Circle from '../assets/circle.png'
 import Waves from '../assets/waves.png'
-import LoginForm from '../components/LoginForm.jsx'
+import Form from '../components/Form.jsx'
 
 function LandingPage() {
 
-    const [showSignup, setShowSignup] = React.useState(false);
-
-    const toggleForm = () => {
-        setShowSignup(!showSignup);
-    }
 
     return(
 
@@ -49,12 +44,14 @@ function LandingPage() {
                         <div className="absolute top-9 left-0 animate-pulse ">
                             <img src={Waves} alt="waves"/>
                         </div>
+
                         <div className="flex flex-col gap-y-10 items-center">
                             <div className="font-bold text-3xl">
                                 Your Ultimate Booking Handler
                             </div>
-                            {/*{showSignup ? <SignupForm /> ? <LoginForm/>}*/}
-                            <LoginForm/>
+
+                            <Form/>
+
                         </div>
 
                         <div className="absolute bottom-16 left-[8vw] animate-pulse">
