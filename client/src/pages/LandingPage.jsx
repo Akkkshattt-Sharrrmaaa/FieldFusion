@@ -2,11 +2,17 @@ import React from 'react';
 import Players from '../assets/players.png'
 import Circle from '../assets/circle.png'
 import Waves from '../assets/waves.png'
-import Form from '../components/Form.jsx'
+import LoginForm from "@/components/LoginForm.jsx";
+import SignupForm from "@/components/SignupForm.jsx";
 
 function LandingPage() {
 
+    // true => Login From , false => Signup Form
+    const [formType, setFormType] = React.useState(true)
 
+    function toggleForm(){
+        setFormType(!formType)
+    }
     return(
 
         <div className="w-full h-full overflow-hidden bg-dark_gray_bg text-white">
@@ -50,11 +56,12 @@ function LandingPage() {
                                 Your Ultimate Booking Handler
                             </div>
 
-                            <Form/>
+                            {/*<Form/>*/}
+                            {formType? <LoginForm toggleForm={toggleForm} /> : <SignupForm toggleForm={toggleForm} />}
 
                         </div>
 
-                        <div className="absolute bottom-16 left-[8vw] animate-pulse">
+                        <div className="absolute bottom-8 left-[8vw] animate-pulse">
                             <img src={Waves} alt="waves"/>
                         </div>
                 </div>

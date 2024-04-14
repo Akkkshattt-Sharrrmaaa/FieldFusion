@@ -3,6 +3,7 @@ import React from 'react'
 import {Routes, Route} from "react-router-dom";
 import LandingPage from "@/pages/LandingPage.jsx";
 import BookingPage from "@/pages/BookingPage.jsx";
+import {Toaster} from "react-hot-toast";
 
 function App() {
 
@@ -12,6 +13,8 @@ function App() {
                 <Route path="/" element={<LandingPage/>} />
                 <Route path="/booking" element={<BookingPage/>} />
             </Routes>
+
+            <Toaster/>
         </div>
 
 )
