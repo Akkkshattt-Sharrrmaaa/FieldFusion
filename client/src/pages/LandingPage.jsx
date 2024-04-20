@@ -52,7 +52,7 @@ function LandingPage() {
                         </div>
 
                         <div className="flex flex-col gap-y-10 items-center">
-                            <div className="font-bold text-3xl">
+                            <div className="w-full font-extrabold text-5xl text-center">
                                 Your Ultimate Booking Handler
                             </div>
 

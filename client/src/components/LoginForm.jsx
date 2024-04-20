@@ -13,7 +13,7 @@ function LoginForm(props) {
     const {toggleForm} = props
     const [ loginData, setLoginData ] = useState({
         email : "",
-        pass : ""
+        password : ""
     })
 
 
@@ -30,7 +30,7 @@ function LoginForm(props) {
 
             const Response = await axios.post("http://localhost:3000/api/v1/users/login", loginData)
             if(Response.status === 200){
-                console.log(Response.data)
+                // console.log(Response.data)
                 localStorage.setItem("accessToken", Response.data.data.accessToken)
                 localStorage.setItem("refreshToken", Response.data.data.refreshToken)
                 toast.success("Login successfull")
@@ -47,7 +47,7 @@ function LoginForm(props) {
     return (
         <div
             className=" text-black flex flex-col gap-4 bg-light_blue_bg px-5 py-10 rounded-md shadow-white  shadow-lg items-center border border-black ">
-            <div className="font-bold text-2xl text-dark_blue_bg font-salsa">
+            <div className=" text-3xl text-white font-salsa">
                 Existing User
             </div>
             <div>
