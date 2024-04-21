@@ -46,21 +46,21 @@ function LoginForm(props) {
 
     return (
         <div
-            className=" text-black flex flex-col gap-4 bg-light_blue_bg px-5 py-10 rounded-md shadow-white  shadow-lg items-center border border-black ">
+            className=" text-black flex flex-col gap-4 bg-[#0071fb] px-5 py-10 rounded-md shadow-white  shadow-lg items-center border border-black ">
             <div className=" text-3xl text-white font-salsa">
                 Existing User
             </div>
             <div>
-                <Label htmlFor="email" className="pl-3">Email</Label>
-                <Input type="email" name="email" placeholder="Email" className="w-[20vw]"  onChange={formChangeHandler} value={loginData.email}/>
+                <Label htmlFor="email" className="pl-3 text-amber-50">Email</Label>
+                <Input type="email" name="email" placeholder="johndoe@tempmail.com" className="w-[20vw]"  onChange={formChangeHandler} value={loginData.email}/>
             </div>
             <div>
-                <Label htmlFor="password" className="pl-3">Password</Label>
-                <Input type="password" placeholder="Password" className="w-[20vw]" name="password" onChange={formChangeHandler} value={loginData.password}/>
+                <Label htmlFor="password" className="pl-3 text-amber-50">Password</Label>
+                <Input type="password" placeholder="1234abcd" className="w-[20vw]" name="password" onChange={formChangeHandler} value={loginData.password}/>
             </div>
 
             {/*button*/}
-            <Button onClick={loginHandler}>Login</Button>
+            <Button className={"bg-amber-50 text-blue-950 hover:bg-blue-700 hover:border hover:border-amber-50 hover:text-amber-50 hover:shadow hover:shadow-white"} onClick={loginHandler}>Login</Button>
             {/* change form option*/}
             <div>
                 Don't have and account? <span className="underline text-amber-50 cursor-pointer" onClick={()=> (toggleForm())}>Sign Up Now</span>

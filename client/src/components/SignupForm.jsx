@@ -12,7 +12,7 @@ function SignupForm(props) {
         username : "",
         email : "",
         password : "",
-        role : ""
+        role : "user"
     })
 
 
@@ -34,10 +34,6 @@ function SignupForm(props) {
                 toast.success("Signup successfull, You can login now")
                 toggleForm()
 
-            }else{
-                // toast.error("Different status code")
-                toast.error(Response.status)
-                // console.log(Response)
             }
 
         }catch(error){
@@ -51,20 +47,20 @@ function SignupForm(props) {
 
     return (
         <div
-            className=" text-black flex flex-col gap-4 bg-light_blue_bg px-5 py-10 rounded-md shadow-white  shadow-lg items-center border border-black ">
+            className=" text-black flex flex-col gap-4 bg-[#0071fb] px-5 py-10 rounded-md shadow-white  shadow-lg items-center border border-black ">
             <div className="text-3xl text-white font-salsa">
                 New User
             </div>
             <div>
-                <Label htmlFor="username" className="pl-3 ">Username</Label>
-                <Input type="text" name="username" placeholder="Username" className="w-[20vw]" onChange={formChangeHandler} value={signupData.username}/>
+                <Label htmlFor="username" className="pl-3 text-amber-50">Username</Label>
+                <Input type="text" name="username" placeholder="user1234" className="w-[20vw]" onChange={formChangeHandler} value={signupData.username}/>
             </div>
             <div>
-                <Label htmlFor="email" className="pl-3">Email</Label>
-                <Input type="email" name="email" placeholder="Email" className="w-[20vw]"  onChange={formChangeHandler} value={signupData.email}/>
+                <Label htmlFor="email" className="pl-3 text-amber-50">Email</Label>
+                <Input type="email" name="email" placeholder="johndoe@tempmail.com" className="w-[20vw] text-gray-700"  onChange={formChangeHandler} value={signupData.email}/>
             </div>
             <div>
-                <Label htmlFor="password" className="pl-3">Password</Label>
+                <Label htmlFor="password" className="pl-3 text-amber-50">Password</Label>
                 <Input type="password" placeholder="Password" className="w-[20vw]" name="password" onChange={formChangeHandler} value={signupData.password}/>
             </div>
             <div className="flex flex-col">
@@ -76,7 +72,7 @@ function SignupForm(props) {
             </div>
 
             {/*button*/}
-            <Button onClick={signupHandler} >Signup</Button>
+            <Button className={"bg-amber-50 text-blue-950 hover:bg-blue-700 hover:border hover:border-amber-50 hover:text-amber-50 hover:shadow hover:shadow-white"} onClick={signupHandler} >Signup</Button>
 
             {/* change form option*/}
             <div>

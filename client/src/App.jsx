@@ -9,7 +9,7 @@ import CheckoutPage from "@/pages/CheckoutPage.jsx";
 function App() {
 
     return (
-        <div className="w-[100vw] h-[100vh]">
+        <div className="w-screen h-screen">
 
             <Routes>
                 <Route path="/" element={<LandingPage/>} />

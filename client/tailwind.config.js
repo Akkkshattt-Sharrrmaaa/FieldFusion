@@ -18,6 +18,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
+         mulish : ["Mulish"],
          dancing_script: ["Dancing Script"],
         salsa : ["Salsa"],
       },
