@@ -1,36 +1,36 @@
-import toast from "react-hot-toast";
 import axios from "axios";
+import toast from "react-hot-toast";
+import {useContext} from "react";
+import {userContext} from "@/context/context.js";
 import {useNavigate} from "react-router-dom";
-
 
 async function Logout(){
 
-    const navi = useNavigate();
-    try{
-        const accessToken = localStorage.getItem("accessToken");
-        console.log("Access token is , ", accessToken);
-        const res = await axios.post("http://localhost:5000/api/logout", null , {
-           headers: {
-               'Authorization': `Bearer ${accessToken}`
-           }
-        })
+        const navi = useNavigate();
+        const value = useContext(userContext)
 
-        if(res.status === 200){
-            console.log("Logout response status 200")
+        try{
+            const accessToken = value.user.data.accessToken;
+            console.log("Access token is , ", accessToken);
+            const res = await axios.post("http://localhost:3000/api/v1/users/logout", {}, {
+                headers:{
+                    "Authorization": `Bearer ${accessToken}`
+                }
+            })
             console.log(res)
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-            toast.success("Logout successfull")
-            navi('/')
-        }else{
-            console.log("Logout response status not 200")
+            if(res.status === 200){
+                toast.success("Logout successfull")
+                value.setUser({})
+                localStorage.removeItem("accessToken")
+                localStorage.removeItem("refreshToken")
+                navi('/')
+            }else{
+                toast.error(res.status)
+            }
+
+        }catch(error){
+            toast.error("Logout failed")
         }
-
-    }catch(err){
-        toast.error("Logout Unsuccessful")
-        console.log("Inside catch block of Logout function")
-        console.log(err)
     }
-}
 
-export default Logout;
+    export default Logout;

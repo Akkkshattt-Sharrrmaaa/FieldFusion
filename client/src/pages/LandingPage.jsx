@@ -1,7 +1,5 @@
 import React from 'react';
 import Fballers from '../assets/fballers.png'
-import Circle from '../assets/circle.png'
-import Waves from '../assets/waves.png'
 import LoginForm from "@/components/LoginForm.jsx";
 import SignupForm from "@/components/SignupForm.jsx";
 

@@ -1,7 +1,8 @@
-import React from "react";
-import toast from "react-hot-toast";
-import axios from "axios";
+import React, {useContext} from "react";
 import {useNavigate} from "react-router-dom";
+import {userContext} from "@/context/context.js";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function AvatarDropdown(props) {
 
@@ -11,17 +12,31 @@ function AvatarDropdown(props) {
         setIsOpen(!isOpen)
     }
 
-    async function handleLogout() {
-        try{
+    const value = useContext(userContext)
 
-            const res = await axios.post("http://localhost:3000/api/v1/users/logout", {})
+
+    async function logoutHandler(){
+        try{
+            const accessToken = value.user.data.accessToken;
+            console.log("Access token is , ", accessToken);
+            const res = await axios.post("http://localhost:3000/api/v1/users/logout", {}, {
+                headers:{
+                    "Authorization": `Bearer ${accessToken}`
+                }
+            })
             console.log(res)
-            navi('/')
+            if(res.status === 200){
+                toast.success("Logout successfull")
+                value.setUser({})
+                localStorage.removeItem("accessToken")
+                localStorage.removeItem("refreshToken")
+                navi('/')
+            }else{
+                toast.error(res.status)
+            }
 
         }catch(error){
             toast.error("Logout failed")
-            console.log("Error in logout from avatar : ")
-            console.log(error)
         }
     }
 
@@ -80,12 +95,10 @@ function AvatarDropdown(props) {
                 </div>
 
                 <div className="p-2">
-                    <form method="POST" action="#">
                         <button
-                            type="submit"
                             className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
                             role="menuitem"
-                            onClick={handleLogout}
+                            onClick={logoutHandler}
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +117,6 @@ function AvatarDropdown(props) {
 
                             Logout
                         </button>
-                    </form>
                 </div>
             </div>
         </div>

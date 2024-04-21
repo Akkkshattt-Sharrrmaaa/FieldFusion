@@ -1,85 +1,30 @@
-import axios from "axios";
 import toast from "react-hot-toast";
-import {Routes, useNavigate} from "react-router-dom";
 import Footer from "@/components/Footer.jsx";
 import Banner from "@/components/Banner.jsx";
 import Card from "@/components/Card.jsx";
 import GorillaCage from "../assets/gorilla-cage.jpg"
 import PavilionGround from "../assets/pavilion-ground.jpg"
 import KickOff from "../assets/kick-off.jpg"
-import AvatarDropdown from "@/components/AvatarDropdown.jsx";
-import React, {useEffect, useState} from "react";
-import CheckoutPage from "@/pages/CheckoutPage.jsx";
 import Logo from "@/components/Logo.jsx";
-// import Logout from "@/Util/Logout.jsx";
+import AvatarDropdown from "@/components/AvatarDropdown.jsx";
+import {userContext} from "@/context/context.js";
+import {useContext} from "react";
+
 
 function BookingPage() {
 
-    const navi = useNavigate();
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-
-            const accessToken = localStorage.getItem("accessToken");
-            if(!accessToken){
-                navi('/')
-                toast.error("Unauthorized");
-            }
-            axios.get('http://localhost:3000/api/v1/users/current-user', {
-            headers: { Authorization: `Bearer ${accessToken}` }
-            }).then(response => {
-                console.log(response.data.data)
-                setData(response.data.data);
-                setLoading(false);
-                // console.log(data)
-            }).catch(err=>{
-                console.log(err)
-                console.log("use effect ke catch block me")
-            })
-
-
-    }, []);
-
-    const logoutHandler = async () => {
-        try{
-            const accessToken = localStorage.getItem("accessToken");
-            console.log(accessToken);
-            const Response = await axios.post("http://localhost:3000/api/v1/users/logout", {},
-                {
-                    "Authorization": `Bearer ${accessToken}`
-                });
-
-            console.log(Response)
-            if(Response.status === 200){
-                localStorage.removeItem("accessToken")
-                localStorage.removeItem("refreshToken")
-                toast.success("Logout successfull")
-                navi('/')
-            }else{
-                console.log("response code is not 200")
-            }
-
-        }catch(error){
-            toast.error("Logout Unsuccessful")
-            console.log("error message is : ",error)
-        }
-    }
-
-    if (loading) {
-        return (<p>Loading...</p>);
-    }
+    const value =  useContext(userContext)
 
     return(
         <div className="relative">
 
-             {/*top right logo*/}
+             {/*top left logo*/}
             <div className="absolute top-5 left-5 ">
                 <Logo />
             </div>
              {/*top right avatar dropdown*/}
             <div className="absolute top-5 right-5 ">
-                <AvatarDropdown name={data.username} />
+                <AvatarDropdown name = {value.user.data.user.username} />
             </div>
 
             {/* hero / banner */}
@@ -101,7 +46,7 @@ function BookingPage() {
                     <div className="flex gap-y-10 gap-x-10 justify-center items-center py-20">
 
                         <div className="hover:shadow-2xl hover:shadow-blue-400 hover:cursor-pointer"
-                             onClick={()=> navi('/checkout')}
+                             // onClick={()=> navi('/checkout')}
                         >
                             <Card img={GorillaCage}
                                   title="Gorilla Cage, Bidholi,Dehradun"
@@ -146,10 +91,9 @@ function BookingPage() {
             </div>
 
 
-{/*  footer */
-}
-    <Footer/>
-</div>
+            {/*  footer */}
+            <Footer/>
+        </div>
 )
 
 }

@@ -5,17 +5,18 @@ import React, {useState} from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
-
+import {useContext} from "react";
+import {userContext} from "@/context/context.js";
 
 function LoginForm(props) {
 
+    const value = useContext(userContext)
     const navi = useNavigate();
     const {toggleForm} = props
     const [ loginData, setLoginData ] = useState({
         email : "",
         password : ""
     })
-
 
     function formChangeHandler(event) {
         setLoginData( (prevState) => ({
@@ -30,9 +31,9 @@ function LoginForm(props) {
 
             const Response = await axios.post("http://localhost:3000/api/v1/users/login", loginData)
             if(Response.status === 200){
-                // console.log(Response.data)
                 localStorage.setItem("accessToken", Response.data.data.accessToken)
                 localStorage.setItem("refreshToken", Response.data.data.refreshToken)
+                value.setUser(Response.data)
                 toast.success("Login successfull")
                 navi('/booking')
             }

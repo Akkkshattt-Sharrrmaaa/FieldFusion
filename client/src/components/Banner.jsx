@@ -1,6 +1,39 @@
+import toast from "react-hot-toast";
+import {useNavigate} from "react-router-dom";
+import {useContext} from "react";
+import {userContext} from "@/context/context.js";
+import axios from "axios";
 
 function Banner(){
 
+    const navi = useNavigate()
+    const value = useContext(userContext)
+
+
+    async function logoutHandler(){
+        try{
+            const accessToken = value.user.data.accessToken;
+            console.log("Access token is , ", accessToken);
+            const res = await axios.post("http://localhost:3000/api/v1/users/logout", {}, {
+                headers:{
+                    "Authorization": `Bearer ${accessToken}`
+                }
+            })
+            console.log(res)
+            if(res.status === 200){
+                toast.success("Logout successfull")
+                value.setUser({})
+                localStorage.removeItem("accessToken")
+                localStorage.removeItem("refreshToken")
+                navi('/')
+            }else{
+                toast.error(res.status)
+            }
+
+        }catch(error){
+            toast.error("Logout failed")
+        }
+    }
 
     return (
         <section className="bg-gray-50">
@@ -16,19 +49,19 @@ function Banner(){
                     </p>
 
                     <div className="mt-8 flex flex-wrap justify-center gap-4">
-                        <a
+                        <button
                             className="block w-full rounded bg-blue-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-500 focus:outline-none focus:ring active:bg-blue-800 sm:w-auto"
-                            href="#"
                         >
                             Book Now
-                        </a>
+                        </button>
 
-                        <a
+                        <button
                             className="block w-full rounded px-12 py-3 text-sm font-medium text-blue-600 shadow hover:text-blue-700 focus:outline-none focus:ring active:text-blue-500 sm:w-auto"
-                            href="#"
+                            onClick={logoutHandler}
+
                         >
                             Log out
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
