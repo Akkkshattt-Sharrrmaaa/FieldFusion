@@ -1,52 +1,33 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
-import {useNavigate} from "react-router-dom";
-import toast from "react-hot-toast";
 import Logo from "@/components/Logo.jsx";
-import AvatarDropdown from "@/components/AvatarDropdown.jsx";
 import Footer from "@/components/Footer.jsx";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-import Card from "@/components/Card.jsx";
-import {CardContent} from "@/components/ui/card.jsx";
-
+import AvatarDropdown from "@/components/AvatarDropdown.jsx";
+import {useContext, useState} from "react";
+import {userContext} from "@/context/context.js";
+import {Carousel} from "@material-tailwind/react";
+import img1 from "@/assets/gc/iloveimg-resized/img1.jpeg"
+import img3 from "@/assets/gc/iloveimg-resized/img3.jpeg"
+import 'react-datepicker/dist/react-datepicker.css'
+import DatePicker from "react-datepicker";
 
 function CheckoutPage() {
 
-    const navi = useNavigate();
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const value = useContext(userContext)
 
-    // useEffect(() => {
-    //
-    //         const accessToken = localStorage.getItem("accessToken");
-    //         if(!accessToken){
-    //             navi('/')
-    //             toast.error("Unauthorized");
-    //         }
-    //         axios.get('http://localhost:3000/api/v1/users/current-user', {
-    //         headers: { Authorization: `Bearer ${accessToken}` }
-    //         }).then(response => {
-    //             console.log(response.data.data)
-    //             setData(response.data.data);
-    //             setLoading(false);
-    //             // console.log(data)
-    //         }).catch(err=>{
-    //             console.log(err)
-    //             console.log("use effect ke catch block me")
-    //         })
-    //
-    //
-    // }, []);
+    const [selectedDate, setSelectedDate] = useState(new Date())
+
+    const getMaxDate = () => {
+        const today = new Date()
+        return new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000)
+    }
+
+    const slides = [
+        img1,
+        img3
+    ]
 
     return(
         <div
-            className="relative"
+            className="relative w-full h-full"
         >
             {/* left logo */}
             <div
@@ -55,23 +36,47 @@ function CheckoutPage() {
                 <Logo />
             </div>
 
-            {/* right avatar panel*/}
-            {/*<div*/}
-            {/*    className="absolute top-5 right-5 "*/}
-            {/*>*/}
-            {/*   <AvatarDropdown name={data.username} />*/}
-            {/*</div>*/}
+            <div className="absolute top-5 right-5 ">
+                <AvatarDropdown name = {value.user.data.user.username} />
+            </div>
 
             {/* main content */}
-            <div>
+            <div className={"py-28 flex justify-around"}>
 
                 {/* left*/}
-                <div>
-                    <div> Gorilla Cage </div>
-                    <div> Near UPES, Bidholi, Dehradun</div>
+                <div className={"flex flex-col gap-4"}>
+
+                    <div>
+                        <div className={"font-mulish text-gray-700 font-extrabold text-3xl"}> Gorilla Cage</div>
+                        <div className={"font-mulish text-gray-500 font-bold text-2xl"}> Near UPES, Bidholi, Dehradun</div>
+                    </div>
+
+                    <div className="max-w-lg">
+                        <Carousel>
+                            {slides.map((slide, index) => (
+                                <img src={slide} alt={index} key={index} />
+                            ))}
+                        </Carousel>
+                    </div>
                 </div>
 
+                {/*right*/}
                 <div>
+                    <div>
+                        Book Your Slot
+                    </div>
+
+                    <div className={"text-black bg-dark_blue_bg"}>
+                        <DatePicker
+                            selected={selectedDate}
+                            onChange={(date)=> setSelectedDate(date)}
+                            minDate={new Date()}
+                            maxDate={getMaxDate()}
+                            dateFormat="dd/MM/yyyy"
+                            showDisabledMonthNavigation
+                        />
+                    </div>
+
 
                 </div>
 

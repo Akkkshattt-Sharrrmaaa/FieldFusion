@@ -33,7 +33,7 @@ function LandingPage() {
 
 
            {/*  form*/}
-           <div className={"absolute bottom-12 right-12 shadow-blue-800 shadow-xl opacity-90 hover:opacity-100 hover:scale-105 transition duration-200 ease-in-out"}>
+           <div className={"absolute bottom-12 right-12 shadow-cyan-700/50 shadow-xl opacity-90 hover:opacity-100 hover:scale-105 transition duration-200 ease-in-out"}>
               {formType? <LoginForm toggleForm={toggleForm} /> : <SignupForm toggleForm={toggleForm} />}
            </div>
         </div>

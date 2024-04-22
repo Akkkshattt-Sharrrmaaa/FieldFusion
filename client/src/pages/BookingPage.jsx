@@ -9,10 +9,12 @@ import Logo from "@/components/Logo.jsx";
 import AvatarDropdown from "@/components/AvatarDropdown.jsx";
 import {userContext} from "@/context/context.js";
 import {useContext} from "react";
+import {useNavigate} from "react-router-dom";
 
 
 function BookingPage() {
 
+    const navi = useNavigate()
     const value =  useContext(userContext)
 
     return(
@@ -46,7 +48,7 @@ function BookingPage() {
                     <div className="flex gap-y-10 gap-x-10 justify-center items-center py-20">
 
                         <div className="hover:shadow-2xl hover:shadow-blue-400 hover:cursor-pointer"
-                             // onClick={()=> navi('/checkout')}
+                             onClick={()=> navi('/checkout')}
                         >
                             <Card img={GorillaCage}
                                   title="Gorilla Cage, Bidholi,Dehradun"

@@ -7,12 +7,22 @@ import toast from "react-hot-toast";
 function AvatarDropdown(props) {
 
     const navi = useNavigate()
+    const value = useContext(userContext)
     const [isOpen, setIsOpen] = React.useState(false);
+
     function handleToggle() {
         setIsOpen(!isOpen)
     }
 
-    const value = useContext(userContext)
+    function moveToProfile() {
+        navi('/profile')
+    }
+
+
+    function moveToBookingHistory() {
+        navi('/profile/bookinghistory')
+    }
+
 
 
     async function logoutHandler(){
@@ -76,21 +86,21 @@ function AvatarDropdown(props) {
                 role="menu"
             >
                 <div className="p-2">
-                    <a
-                        href="#"
+                    <button
                         className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
                         role="menuitem"
+                        onClick={moveToProfile}
                     >
                         Profile
-                    </a>
+                    </button>
 
-                    <a
-                        href="#"
+                    <button
                         className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
                         role="menuitem"
+                        onClick={moveToBookingHistory}
                     >
                         Booking History
-                    </a>
+                    </button>
 
                 </div>
 

@@ -6,6 +6,8 @@ import BookingPage from "@/pages/BookingPage.jsx";
 import {Toaster} from "react-hot-toast";
 import CheckoutPage from "@/pages/CheckoutPage.jsx";
 import {userContext} from "@/context/context.js";
+import Profile from "@/pages/Profile.jsx";
+import BookingHistory from "@/pages/BookingHistory.jsx";
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
                         <Route path="/" element={<LandingPage/>}/>
                         <Route path="/booking" element={<BookingPage/>}/>
                         <Route path="/checkout" element={<CheckoutPage/>}/>
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/profile/bookinghistory" element={<BookingHistory />} />
                     </Routes>
 
                     <Toaster/>

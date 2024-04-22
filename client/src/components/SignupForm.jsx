@@ -4,6 +4,7 @@ import {Button} from "@/components/ui/button.jsx";
 import React, {useState} from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import {useNavigate} from "react-router-dom";
 
 function SignupForm(props) {
 
@@ -24,17 +25,24 @@ function SignupForm(props) {
         }))
     }
 
+    const navi = useNavigate()
+
     const signupHandler = async () => {
         try{
+            if(signupData.username === "" || signupData.email === "" || signupData.password === ""){
+                toast.error("All fields are required");
+            }else{
+                   const Response = await axios.post("http://localhost:3000/api/v1/users/register", signupData)
+                if(Response.status === 201){
+                    console.log(Response.data)
 
-            const Response = await axios.post("http://localhost:3000/api/v1/users/register", signupData)
-            if(Response.status === 201){
-                console.log(Response.data)
+                    toast.success("Signup successfull, You can login now")
+                    toggleForm()
 
-                toast.success("Signup successfull, You can login now")
-                toggleForm()
-
+                }
             }
+
+
 
         }catch(error){
             // toast.error("Email or Username already in use")
