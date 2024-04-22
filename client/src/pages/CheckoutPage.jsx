@@ -8,6 +8,7 @@ import img1 from "@/assets/gc/iloveimg-resized/img1.jpeg"
 import img3 from "@/assets/gc/iloveimg-resized/img3.jpeg"
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from "react-datepicker";
+import toast from "react-hot-toast";
 
 function CheckoutPage() {
 
@@ -18,6 +19,15 @@ function CheckoutPage() {
     const getMaxDate = () => {
         const today = new Date()
         return new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000)
+    }
+
+    const fetchAvailableSlots = async () => {
+        try {
+           const formattedDate = selectedDate.toISOString().split('T')[0]
+        }catch(error){
+            console.log(error)
+            toast.error("Failed to fetch available slots")
+        }
     }
 
     const slides = [
@@ -72,9 +82,11 @@ function CheckoutPage() {
                             onChange={(date)=> setSelectedDate(date)}
                             minDate={new Date()}
                             maxDate={getMaxDate()}
-                            dateFormat="dd/MM/yyyy"
+                            dateFormat="yyyy-MM-dd"
                             showDisabledMonthNavigation
                         />
+
+                        <button onClick={fetchAvailableSlots}>Check Available Slots</button>
                     </div>
 
 

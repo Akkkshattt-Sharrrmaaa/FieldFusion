@@ -5,12 +5,18 @@ import toast from "react-hot-toast";
 import Footer from "@/components/Footer.jsx";
 import Logo from "@/components/Logo.jsx";
 import AvatarDropdown from "@/components/AvatarDropdown.jsx";
+import {useNavigate} from "react-router-dom";
 
 
 function BookingHistory(){
 
     const [history, setHistory] = useState([]);
     const value = useContext(userContext)
+    const navi = useNavigate()
+
+    const moveToBooking = () => {
+        navi("/booking")
+    }
 
     useEffect(() => {
 
@@ -153,7 +159,7 @@ function BookingHistory(){
                         <div className={"text-2xl font-bold text-blue-800"}>
                             Coz you've not made any bookings yet
                         </div>
-                        <div><span className={"underline text-light_blue_bg cursor-pointer"}>Click here</span> to make
+                        <div><span onClick={moveToBooking} className={"underline text-light_blue_bg cursor-pointer"}>Click here</span> to make
                             one now!
                         </div>
                     </div>}
