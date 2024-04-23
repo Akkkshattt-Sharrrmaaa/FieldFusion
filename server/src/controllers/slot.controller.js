@@ -156,8 +156,25 @@ const getAvailableSlots = asyncHandler(async (req, res) => {
 });
 
 const mail = asyncHandler(async(req, res) => {
-    const {mailId} = req.body;
+    const {mailId, startTime, endTime, date} = req.body;
+    const {startTimeAdjusted, endTimeAdjusted} = convertStringToHours(startTime, endTime);
+
+    if([date, startTime, endTime].some(field => field.trim()==="")){
+        throw new ApiError(400, "All the fields are required!!");
+    }
+
     if(!mailId) throw new ApiError(400, "Mail Id is required");
+
+    const slot = await Slot.find({
+        $and: [
+            { date: date },
+            { startTime: { $eq: startTimeAdjusted } },
+            { endTime: { $eq: endTimeAdjusted } }
+        ]
+    })
+
+    if(!slot) throw new ApiError(404, "Slot is not booked");
+
 
     const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -170,8 +187,14 @@ const mail = asyncHandler(async(req, res) => {
     const info = await transporter.sendMail({
         from: process.env.MAIL_ID,
         to: mailId,
-        subject: "Confirmation",
-        text: "Slot is booked successfully",
+        subject: "Slot Booking Confirmation",
+        text: `Thank you for booking a slot. Your booking details are as follow:
+Date: ${date},
+Start Time: ${startTime},
+End Time: ${endTime}
+                
+We are looking forward to see you soon.`
+
     });
 
     return res.status(200).json({
