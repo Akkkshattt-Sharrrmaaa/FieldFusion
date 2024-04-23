@@ -98,6 +98,33 @@ const bookSlot = asyncHandler(async(req, res) => {
     )
 });
 
+const getAllSlots = asyncHandler(async (req, res) => {
+    try {
+        const bookedSlots = await Slot.find({ status: 'booked' })
+            .populate('owner', 'name email') // Populate the owner field with name and email
+            .sort({ createdAt: -1 }); // Sort by creation date in descending order
+
+        if (!bookedSlots || bookedSlots.length === 0) {
+            return res.status(200).json(new ApiResponse(200, [], 'No booked slots found'));
+        }
+
+        // Convert startTime and endTime to AM/PM format
+        const formattedSlots = bookedSlots.map(slot => {
+            const startTimeFormatted = convertToAmPm(slot.startTime);
+            const endTimeFormatted = convertToAmPm(slot.endTime);
+            return {
+                ...slot.toObject(),
+                startTime: startTimeFormatted,
+                endTime: endTimeFormatted,
+            };
+        });
+
+        return res.status(200).json(new ApiResponse(200, formattedSlots, 'Booked slots fetched successfully'));
+    } catch (error) {
+        throw new ApiError(500, 'Something went wrong while fetching booked slots');
+    }
+});
+
 const getAvailableSlots = asyncHandler(async (req, res) => {
     const { date } = req.body;
     if (!date) throw new ApiError(400, "Date is required");
@@ -207,5 +234,6 @@ We are looking forward to see you soon.`
 export {
     bookSlot,
     getAvailableSlots,
-    mail
+    mail,
+    getAllSlots,
 }

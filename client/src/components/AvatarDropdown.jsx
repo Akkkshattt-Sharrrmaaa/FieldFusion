@@ -23,6 +23,10 @@ function AvatarDropdown(props) {
         navi('/profile/bookinghistory')
     }
 
+    function moveToHome(){
+        navi('/booking')
+    }
+
 
 
     async function logoutHandler(){
@@ -86,6 +90,15 @@ function AvatarDropdown(props) {
                 role="menu"
             >
                 <div className="p-2">
+
+                    <button
+                        className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                        role="menuitem"
+                        onClick={moveToHome}
+                    >
+                        Home
+                    </button>
+
                     <button
                         className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
                         role="menuitem"
@@ -105,11 +118,11 @@ function AvatarDropdown(props) {
                 </div>
 
                 <div className="p-2">
-                        <button
-                            className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
-                            role="menuitem"
-                            onClick={logoutHandler}
-                        >
+                    <button
+                        className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                        role="menuitem"
+                        onClick={logoutHandler}
+                    >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-4 w-4"

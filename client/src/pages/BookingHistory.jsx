@@ -13,6 +13,7 @@ function BookingHistory(){
     const [history, setHistory] = useState([]);
     const value = useContext(userContext)
     const navi = useNavigate()
+    const [api, setApi] = useState("http://localhost:3000/api/v1/users/booking-history")
 
     const moveToBooking = () => {
         navi("/booking")
@@ -22,8 +23,12 @@ function BookingHistory(){
 
         const fetchBookingHistory = async () => {
             try{
+                const userType = value.user.data.user.role
+                if(userType === "admin"){
+                    setApi("http://localhost:3000/api/v1/slots/get-all-slots")
+                }
                const accessToken = value.user.data.accessToken || localStorage.getItem("accessToken");
-               const res = await  axios.get('http://localhost:3000/api/v1/users/booking-history', {
+               const res = await  axios.get(api, {
                   headers:{
                       Authorization: `Bearer ${accessToken}`
                   }
@@ -97,11 +102,24 @@ function BookingHistory(){
                                                 >
                                                     End Time
                                                 </th>
+                                                <div>
+                                                   {
+                                                    value.user.data.user.role === "admin" &&
+                                                    <th
+                                                        scope="col"
+                                                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                    >
+                                                        Owner
+                                                    </th>
+                                                }
+                                                </div>
+
+
                                                 <th
                                                     scope="col"
                                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                 >
-                                                    Status
+                                                Status
                                                 </th>
                                                 {/*<th scope="col" className="relative px-6 py-3">*/}
                                                 {/*    <span className="sr-only">Edit</span>*/}
@@ -126,6 +144,15 @@ function BookingHistory(){
                                                     <td className="px-6 py-4 whitespace-nowrap">
                                                         {booking.endTime}
                                                     </td>
+                                                    <div>
+                                                       {
+                                                    value.user.data.user.role === "admin" &&
+                                                        <td className="px-6 py-4 whitespace-nowrap">
+                                                            {booking.owner.email}
+                                                        </td>
+                                                    }
+                                                    </div>
+
                                                     <td className="px-6 py-4 whitespace-nowrap">
                                                           <span
                                                               className="px-2 inline-flex text-xs leading-5

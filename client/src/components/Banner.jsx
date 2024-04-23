@@ -9,6 +9,10 @@ function Banner(){
     const navi = useNavigate()
     const value = useContext(userContext)
 
+    function moveToCheckout(){
+        navi('/checkout')
+    }
+
 
     async function logoutHandler(){
         try{
@@ -51,6 +55,7 @@ function Banner(){
                     <div className="mt-8 flex flex-wrap justify-center gap-4">
                         <button
                             className="block w-full rounded bg-blue-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-500 focus:outline-none focus:ring active:bg-blue-800 sm:w-auto"
+                            onClick={moveToCheckout}
                         >
                             Book Now
                         </button>
