@@ -23,7 +23,7 @@ function LandingPage() {
             <div
                 className={"absolute right-5 top-5"}
             >
-                <div className="flex flex-col items-end ">
+                <div className="flex flex-col items-end pr-10 py-5 animate-pulse">
                     <div className="text-blue-800 text-5xl font-mulish  font-extrabold">Field</div>
                     <div className="text-blue-500 text-6xl font-mulish font-extrabold">Fusion</div>
                 </div>

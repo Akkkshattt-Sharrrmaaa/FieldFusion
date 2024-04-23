@@ -55,7 +55,7 @@ function SignupForm(props) {
 
     return (
         <div
-            className=" text-black flex flex-col gap-4 bg-[#0071fb] px-5 py-10 rounded-md shadow-white  shadow-lg items-center border border-black ">
+            className=" text-black flex flex-col gap-4 bg-[#0071fb] px-5 py-10 rounded-md  shadow-2xl items-center border border-black  shadow-blue-400 hover:scale-105 transition duration-200 ease-in-out">
             <div className="text-3xl text-white font-salsa">
                 New User
             </div>
@@ -71,13 +71,13 @@ function SignupForm(props) {
                 <Label htmlFor="password" className="pl-3 text-amber-50">Password</Label>
                 <Input type="password" placeholder="Password" className="w-[20vw]" name="password" onChange={formChangeHandler} value={signupData.password}/>
             </div>
-            <div className="flex flex-col">
-                <Label htmlFor="role" className="pl-3">Role</Label>
-                <select name="role" id="role" onChange={formChangeHandler} value={signupData.role} defaultValue="user"  className="w-[20vw] h-[2.5rem] text-[14px] rounded-md">
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                </select>
-            </div>
+            {/*<div className="flex flex-col">*/}
+            {/*    <Label htmlFor="role" className="pl-3">Role</Label>*/}
+            {/*    <select name="role" id="role" onChange={formChangeHandler} value={signupData.role} defaultValue="user"  className="w-[20vw] h-[2.5rem] text-[14px] rounded-md">*/}
+            {/*        <option value="user">User</option>*/}
+            {/*        <option value="admin">Admin</option>*/}
+            {/*    </select>*/}
+            {/*</div>*/}
 
             {/*button*/}
             <Button className={"bg-amber-50 text-blue-950 hover:bg-blue-700 hover:border hover:border-amber-50 hover:text-amber-50 hover:shadow hover:shadow-white"} onClick={signupHandler} >Signup</Button>

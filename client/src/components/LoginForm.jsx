@@ -47,7 +47,7 @@ function LoginForm(props) {
 
     return (
         <div
-            className=" text-black flex flex-col gap-4 bg-[#0071fb] px-5 py-10 rounded-md shadow-white  shadow-lg items-center border border-black ">
+            className=" text-black flex flex-col gap-4 bg-[#0071fb] px-5 py-10 rounded-md  items-center border border-black shadow-2xl shadow-blue-400 hover:scale-105 transition duration-200 ease-in-out ">
             <div className=" text-3xl text-white font-salsa">
                 Existing User
             </div>

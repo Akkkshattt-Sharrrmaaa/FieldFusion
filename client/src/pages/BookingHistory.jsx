@@ -13,7 +13,7 @@ function BookingHistory(){
     const [history, setHistory] = useState([]);
     const value = useContext(userContext)
     const navi = useNavigate()
-    const [api, setApi] = useState("http://localhost:3000/api/v1/users/booking-history")
+    // const [api, setApi] = useState("http://localhost:3000/api/v1/users/booking-history")
 
     const moveToBooking = () => {
         navi("/booking")
@@ -21,21 +21,44 @@ function BookingHistory(){
 
     useEffect(() => {
 
+        // const userType = value.user.data.user.role
+        //         if(userType == "admin"){
+        //             setApi("http://localhost:3000/api/v1/slots/get-all-slots")
+        //         }
         const fetchBookingHistory = async () => {
             try{
-                const userType = value.user.data.user.role
-                if(userType === "admin"){
-                    setApi("http://localhost:3000/api/v1/slots/get-all-slots")
-                }
-               const accessToken = value.user.data.accessToken || localStorage.getItem("accessToken");
-               const res = await  axios.get(api, {
-                  headers:{
+
+                if( value.user.data.user.role == "admin"){
+                    const accessToken = value.user.data.accessToken || localStorage.getItem("accessToken");
+                    const res = await  axios.get("http://localhost:3000/api/v1/slots/get-all-slots", {
+                    headers:{
                       Authorization: `Bearer ${accessToken}`
-                  }
-               });
-               toast.success("Booking history fetched successfully")
-               console.log("Booking history is ", res.data.data)
-                setHistory(res.data.data)
+                    }
+                    });
+                    toast.success("Booking history fetched successfully")
+                    console.log("Booking history is ", res.data.data)
+                    setHistory(res.data.data)
+                }else{
+                    const accessToken = value.user.data.accessToken || localStorage.getItem("accessToken");
+                    const res = await  axios.get("http://localhost:3000/api/v1/users/booking-history", {
+                    headers:{
+                      Authorization: `Bearer ${accessToken}`
+                    }
+                    });
+                    toast.success("Booking history fetched successfully")
+                    console.log("Booking history is ", res.data.data)
+                    setHistory(res.data.data)
+                }
+
+               // const accessToken = value.user.data.accessToken || localStorage.getItem("accessToken");
+               // const res = await  axios.get(api, {
+               //    headers:{
+               //        Authorization: `Bearer ${accessToken}`
+               //    }
+               // });
+               // toast.success("Booking history fetched successfully")
+               // console.log("Booking history is ", res.data.data)
+               //  setHistory(res.data.data)
            }
            catch (error){
                 toast.error("Failed to fetch booking history")
