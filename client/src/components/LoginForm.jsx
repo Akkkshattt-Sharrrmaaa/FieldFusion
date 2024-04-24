@@ -64,7 +64,7 @@ function LoginForm(props) {
             <Button className={"bg-amber-50 text-blue-950 hover:bg-blue-700 hover:border hover:border-amber-50 hover:text-amber-50 hover:shadow hover:shadow-white"} onClick={loginHandler}>Login</Button>
             {/* change form option*/}
             <div>
-                Don't have and account? <span className="underline text-amber-50 cursor-pointer" onClick={()=> (toggleForm())}>Sign Up Now</span>
+                Don't have an account? <span className="underline text-amber-50 cursor-pointer" onClick={()=> (toggleForm())}>Sign Up Now</span>
             </div>
         </div>
     )

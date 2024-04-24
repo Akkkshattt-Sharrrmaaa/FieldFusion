@@ -8,6 +8,7 @@ import CheckoutPage from "@/pages/CheckoutPage.jsx";
 import {userContext} from "@/context/context.js";
 import Profile from "@/pages/Profile.jsx";
 import BookingHistory from "@/pages/BookingHistory.jsx";
+import About from "@/pages/About.jsx";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                         <Route path="/booking" element={<BookingPage/>}/>
                         <Route path="/checkout" element={<CheckoutPage/>}/>
                         <Route path="/profile" element={<Profile />} />
+                        <Route path="/about" element={<About />} />
                         <Route path="/profile/bookinghistory" element={<BookingHistory />} />
                     </Routes>
 
