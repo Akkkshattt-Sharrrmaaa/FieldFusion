@@ -30,7 +30,7 @@ function BookingHistory(){
 
                 if( value.user.data.user.role == "admin"){
                     const accessToken = value.user.data.accessToken || localStorage.getItem("accessToken");
-                    const res = await  axios.get("http://localhost:3000/api/v1/slots/get-all-slots", {
+                    const res = await  axios.get("https://fieldfusion-wg86.onrender.com/api/v1/slots/get-all-slots", {
                     headers:{
                       Authorization: `Bearer ${accessToken}`
                     }
@@ -40,7 +40,7 @@ function BookingHistory(){
                     setHistory(res.data.data)
                 }else{
                     const accessToken = value.user.data.accessToken || localStorage.getItem("accessToken");
-                    const res = await  axios.get("http://localhost:3000/api/v1/users/booking-history", {
+                    const res = await  axios.get("https://fieldfusion-wg86.onrender.com/api/v1/users/booking-history", {
                     headers:{
                       Authorization: `Bearer ${accessToken}`
                     }
