@@ -32,7 +32,7 @@ function SignupForm(props) {
             if(signupData.username === "" || signupData.email === "" || signupData.password === ""){
                 toast.error("All fields are required");
             }else{
-                   const Response = await axios.post("http://localhost:3000/api/v1/users/register", signupData)
+                   const Response = await axios.post("https://fieldfusion-wg86.onrender.com/api/v1/users/register", signupData)
                 if(Response.status === 201){
                     console.log(Response.data)
 
