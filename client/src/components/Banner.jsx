@@ -18,7 +18,7 @@ function Banner(){
         try{
             const accessToken = value.user.data.accessToken;
             console.log("Access token is , ", accessToken);
-            const res = await axios.post("http://localhost:3000/api/v1/users/logout", {}, {
+            const res = await axios.post("https://fieldfusion-wg86.onrender.com/api/v1/users/logout", {}, {
                 headers:{
                     "Authorization": `Bearer ${accessToken}`
                 }
