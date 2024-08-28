@@ -33,7 +33,7 @@ function CheckoutPage() {
         try {
             const formattedDate = selectedDate.toISOString().split('T')[0]
             console.log("formattedDate : ", formattedDate)
-            const res = await axios.post("http://localhost:3000/api/v1/slots/get-available-slots", {
+            const res = await axios.post("https://fieldfusion-wg86.onrender.com/api/v1/slots/get-available-slots", {
                 "date" : formattedDate
             })
             console.log(res.data.data)
@@ -58,7 +58,7 @@ function CheckoutPage() {
                 console.log("startTime", objectData.startTime)
                 console.log("endTime", objectData.endTime)
                 console.log("status", "not-booked")
-                const res = await axios.post("http://localhost:3000/api/v1/slots/book-slot", {
+                const res = await axios.post("https://fieldfusion-wg86.onrender.com/api/v1/slots/book-slot", {
                     "date": objectData.date,
                     "startTime": objectData.startTime,
                     "endTime": objectData.endTime,
@@ -71,7 +71,7 @@ function CheckoutPage() {
                 console.log(res)
                 if(res.status === 200){
 
-                    const resp  = await axios.post("http://localhost:3000/api/v1/slots/mail",{
+                    const resp  = await axios.post("https://fieldfusion-wg86.onrender.com/api/v1/slots/mail",{
                         "mailId" : value.user.data.user.email,
                         "startTime" : objectData.startTime,
                         "endTime" : objectData.endTime,
